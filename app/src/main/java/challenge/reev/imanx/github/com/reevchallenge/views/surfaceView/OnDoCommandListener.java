@@ -11,4 +11,5 @@ public interface OnDoCommandListener {
 
     void onCrash(Reev.Position position);
 
+    void onFinish(Reev.Position position);
 }

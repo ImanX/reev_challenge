@@ -53,10 +53,20 @@ public class ReevSurfaceView extends LinearLayout implements IReevCommand, IReev
 
     public void mark(Reev.Position position, char c) {
 
-
-        if (position.y > 19 || position.x > 9) {
+        if (position.y > 19) {
+            position.y = 0;
             listener.onCrash(position);
-            return;
+        } else if (position.y < 0) {
+            position.y = 19;
+            listener.onCrash(position);
+        }
+
+        if (position.x > 9) {
+            position.x = 0;
+            listener.onCrash(position);
+        } else if (position.x < 0) {
+            position.x = 9;
+            listener.onCrash(position);
         }
 
 
@@ -121,6 +131,13 @@ public class ReevSurfaceView extends LinearLayout implements IReevCommand, IReev
 
                     }
 
+                    post(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.onFinish(lastArrowPosition);
+                        }
+                    });
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -155,6 +172,7 @@ public class ReevSurfaceView extends LinearLayout implements IReevCommand, IReev
     public void moveToRight() {
         clean(lastArrowPosition);
         lastArrowPosition.x += 1;
+
         mark(lastArrowPosition, ARROWS[1]);
     }
 

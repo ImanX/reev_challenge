@@ -2,11 +2,15 @@ package challenge.reev.imanx.github.com.reevchallenge.views.activities;
 
 import android.app.ProgressDialog;
 import android.databinding.DataBindingUtil;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.gson.GsonBuilder;
 
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private ProgressDialog      dialog;
-
+    private Toolbar             toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,21 +77,33 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
+    private void showToast(final String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplication(), msg, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private OnDoCommandListener commandListener = new OnDoCommandListener() {
         @Override
         public void onMove(char moveCommand, Reev.Position position) {
-            String log = String.format("Reev moved to %s in Position %s", moveCommand, position.getCaption());
-            Log.i("TAG", "onMove: " + log);
+            String log = String.format("Reev Moved to %s in Position %s", moveCommand, position.getCaption());
+            getSupportActionBar().setTitle(log);
         }
 
         @Override
         public void onCrash(Reev.Position position) {
             VibrationProvider.make(getApplication(), 1000);
-            Log.i("TAG", "onCrash: " + position.getCaption());
+            String log = String.format("Reev Crashed in %s Position", position.getCaption());
+            getSupportActionBar().setTitle(log);
+        }
+
+        @Override
+        public void onFinish(Reev.Position position) {
+            String log = String.format("Reev Finished in %s Position", position.getCaption());
+            getSupportActionBar().setTitle(log);
         }
     };
-
-    private void showToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-    }
 }
