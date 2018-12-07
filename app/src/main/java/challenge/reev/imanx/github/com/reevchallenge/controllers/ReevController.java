@@ -1,4 +1,4 @@
-package challenge.reev.imanx.github.com.reevchallenge;
+package challenge.reev.imanx.github.com.reevchallenge.controllers;
 
 import android.content.Context;
 

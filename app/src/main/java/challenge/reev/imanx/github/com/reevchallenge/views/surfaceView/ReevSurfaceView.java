@@ -1,4 +1,4 @@
-package challenge.reev.imanx.github.com.reevchallenge.views;
+package challenge.reev.imanx.github.com.reevchallenge.views.surfaceView;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

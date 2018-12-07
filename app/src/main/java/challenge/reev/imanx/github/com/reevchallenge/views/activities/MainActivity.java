@@ -1,4 +1,4 @@
-package challenge.reev.imanx.github.com.reevchallenge;
+package challenge.reev.imanx.github.com.reevchallenge.views.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +9,12 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONObject;
 
 import challenge.reev.imanx.github.com.network.OnCallbackListener;
+import challenge.reev.imanx.github.com.reevchallenge.R;
+import challenge.reev.imanx.github.com.reevchallenge.VibrationProvider;
+import challenge.reev.imanx.github.com.reevchallenge.controllers.ReevController;
 import challenge.reev.imanx.github.com.reevchallenge.models.Reev;
-import challenge.reev.imanx.github.com.reevchallenge.views.OnDoCommandListener;
-import challenge.reev.imanx.github.com.reevchallenge.views.ReevSurfaceView;
+import challenge.reev.imanx.github.com.reevchallenge.views.surfaceView.OnDoCommandListener;
+import challenge.reev.imanx.github.com.reevchallenge.views.surfaceView.ReevSurfaceView;
 
 public class MainActivity extends AppCompatActivity {
 

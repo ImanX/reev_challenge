@@ -1,4 +1,4 @@
-package challenge.reev.imanx.github.com.reevchallenge.views;
+package challenge.reev.imanx.github.com.reevchallenge.views.surfaceView;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -6,8 +6,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-
-import challenge.reev.imanx.github.com.reevchallenge.R;
 
 /**
  * Created by ImanX.

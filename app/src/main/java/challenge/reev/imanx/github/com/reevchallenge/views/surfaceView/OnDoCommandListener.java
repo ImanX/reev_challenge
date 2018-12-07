@@ -1,4 +1,4 @@
-package challenge.reev.imanx.github.com.reevchallenge.views;
+package challenge.reev.imanx.github.com.reevchallenge.views.surfaceView;
 
 import challenge.reev.imanx.github.com.reevchallenge.models.Reev;
 
