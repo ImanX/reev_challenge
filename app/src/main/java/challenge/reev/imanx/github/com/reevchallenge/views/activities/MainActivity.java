@@ -1,5 +1,6 @@
 package challenge.reev.imanx.github.com.reevchallenge.views.activities;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,20 +13,21 @@ import challenge.reev.imanx.github.com.network.OnCallbackListener;
 import challenge.reev.imanx.github.com.reevchallenge.R;
 import challenge.reev.imanx.github.com.reevchallenge.VibrationProvider;
 import challenge.reev.imanx.github.com.reevchallenge.controllers.ReevController;
+import challenge.reev.imanx.github.com.reevchallenge.databinding.ActivityMainBinding;
 import challenge.reev.imanx.github.com.reevchallenge.models.Reev;
 import challenge.reev.imanx.github.com.reevchallenge.views.surfaceView.OnDoCommandListener;
 import challenge.reev.imanx.github.com.reevchallenge.views.surfaceView.ReevSurfaceView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ReevSurfaceView table;
+    private ActivityMainBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        this.table = findViewById(R.id.table);
-        this.table.setListener(commandListener);
+        this.binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        this.binding.surface.setListener(commandListener);
         new ReevController(this).getCommand(callbackListener);
     }
 
@@ -36,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
             final Reev reev = new GsonBuilder().create().fromJson(content, Reev.class);
 
 
-            table.post(new Runnable() {
+            binding.surface.post(new Runnable() {
                 @Override
                 public void run() {
-                    table.start(reev.startPosition, reev.weirs);
+                    binding.surface.start(reev.startPosition, reev.weirs);
                 }
             });
 
 
-            table.doCommands(reev.getCommands());
+            binding.surface.doCommands(reev.getCommands());
 
         }
 
