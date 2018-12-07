@@ -1,6 +1,7 @@
 package challenge.reev.imanx.github.com.reevchallenge.views.surfaceView;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.Button;
@@ -17,12 +18,10 @@ import challenge.reev.imanx.github.com.reevchallenge.models.Reev;
  */
 public class ReevSurfaceView extends LinearLayout implements IReevCommand, IReevMark {
 
-    private static final char          MARK_WEIR = '#';
-    private static final char[]        ARROWS    = {'↑', '→', '←'};
-    private              Reev.Position lastArrowPosition;
-
-    @Nullable
-    private OnDoCommandListener listener;
+    private static final char                MARK_WEIR = '#';
+    private static final char[]              ARROWS    = {'▲', '▶', '◀'};
+    private              Reev.Position       lastArrowPosition;
+    private              OnDoCommandListener listener;
 
     public ReevSurfaceView(Context context) {
         super(context);
@@ -56,12 +55,13 @@ public class ReevSurfaceView extends LinearLayout implements IReevCommand, IReev
 
 
         if (position.y > 19 || position.x > 9) {
+            listener.onCrash(position);
             return;
         }
 
 
         try {
-            Row      row    = (Row) this.getChildAt((19 - position.y));
+            Row    row    = (Row) this.getChildAt((19 - position.y));
             Button button = (Button) row.getChildAt(position.x);
 
             if (button.getText().equals(String.valueOf(MARK_WEIR))) {
@@ -90,7 +90,7 @@ public class ReevSurfaceView extends LinearLayout implements IReevCommand, IReev
     }
 
     @Override
-    public void start(Reev.Position startPosition, List<Reev.Position> weirs, OnDoCommandListener listener) {
+    public void start(Reev.Position startPosition, List<Reev.Position> weirs, @NonNull OnDoCommandListener listener) {
         this.lastArrowPosition = startPosition;
         mark(startPosition, ARROWS[0]);
         for (Reev.Position p : weirs) {

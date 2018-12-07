@@ -50,7 +50,7 @@ public class Row extends LinearLayout {
     private View buildIndex(int id) {
         Button btn = new Button(getContext());
         btn.setId(id);
-        LinearLayout.LayoutParams params = new LayoutParams(100, 100);
+        LinearLayout.LayoutParams params = new LayoutParams(120, 120);
         btn.setLayoutParams(params);
         return btn;
     }
