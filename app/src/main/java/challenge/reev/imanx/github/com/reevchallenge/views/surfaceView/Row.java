@@ -2,10 +2,14 @@ package challenge.reev.imanx.github.com.reevchallenge.views.surfaceView;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import challenge.reev.imanx.github.com.reevchallenge.R;
 
 /**
  * Created by ImanX.
@@ -44,10 +48,10 @@ public class Row extends LinearLayout {
     }
 
     private View buildIndex(int id) {
-        Button button = new Button(getContext());
-        button.setId(id);
-        LinearLayout.LayoutParams params = new LayoutParams(120, 120);
-        button.setLayoutParams(params);
-        return button;
+        Button btn = new Button(getContext());
+        btn.setId(id);
+        LinearLayout.LayoutParams params = new LayoutParams(100, 100);
+        btn.setLayoutParams(params);
+        return btn;
     }
 }

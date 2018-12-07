@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class ReevSurfaceView extends LinearLayout implements IReevCommand, IReev
 
 
         try {
-            Row    row    = (Row) this.getChildAt((19 - position.y));
+            Row      row    = (Row) this.getChildAt((19 - position.y));
             Button button = (Button) row.getChildAt(position.x);
 
             if (button.getText().equals(String.valueOf(MARK_WEIR))) {

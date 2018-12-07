@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
 
@@ -60,12 +61,14 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onFailureResponse(int httpCode, String dataError) {
-
+            dialog.dismiss();
+            showToast(String.format("%s: %s", httpCode, dataError));
         }
 
         @Override
         public void onFailureConnection() {
-
+            dialog.dismiss();
+            showToast("Connection Failure");
         }
     };
 
@@ -83,4 +86,8 @@ public class MainActivity extends AppCompatActivity {
             Log.i("TAG", "onCrash: " + position.getCaption());
         }
     };
+
+    private void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
 }
