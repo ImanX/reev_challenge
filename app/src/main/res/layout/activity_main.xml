@@ -9,25 +9,26 @@
         android:orientation="vertical"
         tools:context=".views.activities.MainActivity">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <HorizontalScrollView
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <challenge.reev.imanx.github.com.reevchallenge.views.surfaceView.ReevSurfaceView
-                    android:id="@+id/surface"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                </challenge.reev.imanx.github.com.reevchallenge.views.surfaceView.ReevSurfaceView>
-            </HorizontalScrollView>
+                    <challenge.reev.imanx.github.com.reevchallenge.views.surfaceView.ReevSurfaceView
+                        android:id="@+id/surface"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                    </challenge.reev.imanx.github.com.reevchallenge.views.surfaceView.ReevSurfaceView>
+                </HorizontalScrollView>
 
 
-        </ScrollView>
+            </ScrollView>
+
 
 
     </LinearLayout>

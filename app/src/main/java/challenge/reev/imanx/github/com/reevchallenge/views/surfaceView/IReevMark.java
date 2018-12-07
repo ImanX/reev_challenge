@@ -13,7 +13,7 @@ public interface IReevMark {
 
     void mark(Reev.Position position);
 
-    void start(Reev.Position startPosition, List<Reev.Position> weirs);
+    void start(Reev.Position startPosition, List<Reev.Position> weirs, OnDoCommandListener listener);
 
     void clean(Reev.Position position);
 

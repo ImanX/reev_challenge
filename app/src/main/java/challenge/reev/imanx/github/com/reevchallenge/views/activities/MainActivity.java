@@ -1,8 +1,10 @@
 package challenge.reev.imanx.github.com.reevchallenge.views.activities;
 
+import android.app.ProgressDialog;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 
 import com.google.gson.GsonBuilder;
@@ -21,13 +23,20 @@ import challenge.reev.imanx.github.com.reevchallenge.views.surfaceView.ReevSurfa
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private ProgressDialog      dialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        this.binding.surface.setListener(commandListener);
+        dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setMessage("Resolving data from 'Reev.ca' ...");
+        dialog.show();
+
+
         new ReevController(this).getCommand(callbackListener);
     }
 
@@ -36,15 +45,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onSuccessResponse(JSONObject jsonObject, String content) {
             final Reev reev = new GsonBuilder().create().fromJson(content, Reev.class);
-
-
+            dialog.dismiss();
             binding.surface.post(new Runnable() {
                 @Override
                 public void run() {
-                    binding.surface.start(reev.startPosition, reev.weirs);
+                    binding.surface.start(reev.startPosition, reev.weirs, commandListener);
+
                 }
             });
-
 
             binding.surface.doCommands(reev.getCommands());
 
@@ -65,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
     private OnDoCommandListener commandListener = new OnDoCommandListener() {
         @Override
         public void onMove(char moveCommand, Reev.Position position) {
-            Log.i("TAG", "onMove: " + moveCommand + " pos: " + position.getCaption());
+            String log = String.format("Reev moved to %s in Position %s", moveCommand, position.getCaption());
+            Log.i("TAG", "onMove: " + log);
         }
 
         @Override

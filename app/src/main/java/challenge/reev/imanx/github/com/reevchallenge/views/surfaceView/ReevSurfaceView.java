@@ -51,11 +51,6 @@ public class ReevSurfaceView extends LinearLayout implements IReevCommand, IReev
     }
 
 
-    public void setListener(@Nullable OnDoCommandListener listener) {
-        this.listener = listener;
-    }
-
-
     public void mark(Reev.Position position, char c) {
 
 
@@ -71,6 +66,10 @@ public class ReevSurfaceView extends LinearLayout implements IReevCommand, IReev
             if (button.getText().equals(String.valueOf(MARK_WEIR))) {
                 if (listener != null) listener.onCrash(position);
                 return;
+            }
+
+            if (listener != null) {
+                listener.onMove(c, position);
             }
 
 
@@ -90,12 +89,13 @@ public class ReevSurfaceView extends LinearLayout implements IReevCommand, IReev
     }
 
     @Override
-    public void start(Reev.Position startPosition, List<Reev.Position> weirs) {
+    public void start(Reev.Position startPosition, List<Reev.Position> weirs, OnDoCommandListener listener) {
         this.lastArrowPosition = startPosition;
         mark(startPosition, ARROWS[0]);
         for (Reev.Position p : weirs) {
             mark(p);
         }
+        this.listener = listener;
     }
 
     @Override
